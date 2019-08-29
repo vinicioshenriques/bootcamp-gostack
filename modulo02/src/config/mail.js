@@ -10,16 +10,3 @@ export default {
     from: 'Equipe GoBarber <noreply@gobarber.com>',
   },
 };
-
-// export default {
-//   host: 'smtp.gmail.com',
-//   port: 465,
-//   secure: true,
-//   auth: {
-//     user: 'viniciosdelabari@gmail.com',
-//     pass: 'qwe321qwe',
-//   },
-//   default: {
-//     from: 'Equipe GoBarber <noreply@gobarber.com>',
-//   },
-// };
