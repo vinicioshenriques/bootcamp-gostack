@@ -1,0 +1,68 @@
+# Iniciando Projeto em react
+
+criar a pasta, entrar nela e abrir o terminal
+
+
+yarn init -y    
+// para iniciar o yarn e criar o package.json
+
+
+yarn add @babel/core @babel/preset-env @babel/preset-react webpack webpack-cli -D
+// para adicionar as dependencias necessárias como dependencias de Dev
+
+yarn add babel-loader -D
+// adicionar mais o babel loader como dependencia de dev
+
+yarn add webpack-dev-server -D
+// adicionar mais o babel loader como dependencia de dev
+
+yarn add react react-dom
+// para instalar como dependencias normais
+
+
+//criar arquivo babel.config.js dentro da pasta, serve para o browser reconhecer
+//as novas funções do javascript
+module.exports = {
+  presets: ["@babel/preset-env", "@babel/preset-react"]
+};
+
+
+
+//criar pasta src dentro da pasta do projeto, e dentro dela o arquivo index.js
+//e dentro dele o seguinte código so para testes
+const soma = (a, b) => a + b;
+alert(soma(1, 3));
+
+//criar arquivo webpack.config.js dentro da pasta
+const path = require("path");
+module.exports = {
+  presets: path.resolve(__dirname, "src", "index.js"),
+  output: {
+    path: path.resolve(__dirname, "public"),
+    filename: "bundle.js"
+  },
+  devServer: {
+    contentBase: path.resolve(__dirname, "public")
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
+        }
+      }
+    ]
+  }
+};
+
+// no package.json adicionar o script de build e de produção
+
+
+"scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack-dev-server --mode development"
+  }
+
+
