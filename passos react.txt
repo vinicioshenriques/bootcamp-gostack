@@ -66,3 +66,45 @@ module.exports = {
   }
 
 
+// no index.html na pasta public criar a div com id app para renderizar o conteudo nela
+
+<div id="app"></div>
+
+// no index.js da pasta source, importar o react e e render do react-dom
+
+import React from "react";
+import { render } from "react-dom";
+
+// agora testamos a renderização na div app
+render(<h1> hello World</h1>, document.getElementById("app"));
+
+
+// criar arquivo app.js na pasta src
+
+import React from "react";
+
+function App() {
+  return <h1>Hello World1/</h1>;
+}
+
+export default App;
+
+
+// importar o App.js no index.js e colocar ele pra renderizar 
+import App from "./app";
+
+render(<App />, document.getElementById("app"));
+
+// adicionar mais 2 loaders, de estilo, como dependencia de desenvolvimento
+
+yarn add style-loader css-loader -D
+
+// colocá-los nas configurações do webpack
+
+{
+	test: /\.css$/,
+	use: [{ loader: "style-loader" }, { loader: "css-loader" }]
+}
+
+
+
