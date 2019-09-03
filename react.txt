@@ -1,0 +1,189 @@
+/// criar o projeto
+yarn create react-app modulo05
+
+apagar arquivos desnecessários
+
+// criar o arquivo editor.config, com botão direito(precisa da extensão)
+root = true
+
+[*]
+end_of_line = lf
+indent_style = space
+indent_size = 2
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+
+
+// apagar eslint do package.json
+
+// instalar o eslint no yarn
+
+yarn add eslint -D
+
+//iniciar o eslint
+
+yarn eslint --init
+
+// instalar o prettier
+
+yarn add prettier eslint-config-prettier eslint-plugin-prettier -D
+
+// não instalar o babel-eslint pois ele ja vem no react script 
+// e acabará dando conflito
+// deletar o package.lock.json e rodar o comando yarn
+
+// no eslintrc.js
+extends: adicionar o prettier e prettier/react
+
+// antes do parseroptions adicionar
+parser: "babel-eslint",
+
+//dentro de plugins adicionar 
+"prettier"
+
+
+// adicionar as seguintes regras dentro do rules
+
+"prettier/prettier": "error",
+"react/jsx-filename-extension": ["warn", { extensions: [".jsx", ".js"] }],
+"import/prefer-default-export": "off"
+
+// criar o arquivo .prettierrc e adicionar o seguinte
+{
+  "singleQuote": true,
+  "trailingComma": "es5"
+}
+
+
+// instalar o react-router-dom para o roteamento das páginas
+yarn add react-router-dom
+
+// criar o arquivo de rotas dentro do src
+routes.js
+
+import React from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
+import Main from './pages/Main';
+import Repository from './pages/Repository';
+
+export default function Routes() {
+  return (
+    <BrowserRouter>
+
+      <Switch>
+        <Route path="/" exact component={Main} />
+        <Route path="/repository" component={Repository} />
+      </Switch>
+
+    </BrowserRouter>
+  );
+}
+
+
+// criar a pasta pages dentro de src
+
+//criar as páginas dentro do src, index.js e main.js
+
+
+import React from 'react';
+
+// import { Container } from './styles';
+
+export default function Repository() {
+  return (
+    <div>
+      <h1>Repository</h1>
+    </div>
+  );
+}
+
+
+// adicionar a biblioteca styled components
+
+yarn add styled-components
+
+// criar um arquivo styles.js dentro da pasta da pagina main
+// e nele importar o styled components
+
+import styled from 'styled-components';
+
+export const Title = styled.h1`
+  font-size: 24px;
+  color: #7159c1;
+  font-family: Arial, Helvetica, sans-serif;
+`;
+
+// agora na index.js da pagina main importamos o Title do styles.js
+// e usamos o Title como uma tag no lugar do h1
+import { Title } from './styles';
+<Title>Main</Title>
+
+// podemos fazer encadeamento de estilo e adicionar condições através de propriedades
+// por exemplo, passando a prop error no title, ele verifica se tiver essa prop,
+// a cor do texto fica vermelha
+
+<Title error>
+	Main
+	<small>menor</small>
+</Title>
+
+
+export const Title = styled.h1`
+  font-size: 24px;
+  color: ${props => (props.error ? 'red' : '#7159c1')};
+  font-family: Arial, Helvetica, sans-serif;
+
+  small {
+    font-size: 14px;
+    color: #333;
+  }
+`;
+
+
+////// estilo globais, criar a pasta styles em src, e o arquivo global.js nela
+import { createGlobalStyle } from 'styled-components';
+
+export default createGlobalStyle`
+  * {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+  }
+
+  html, body, #root {
+    min-height: 100%;
+  }
+
+  body {
+    background: #7159c1;
+    -webkit-font-smoothing: antialiased !important;
+  }
+`;
+
+
+//// agora so importar no App.js
+import GlobalStyle from './styles/global';
+ 
+
+// e colocar no return junto com o Routes
+
+return (
+    <>
+      <Routes />
+      <GlobalStyle />
+    </>
+  );
+
+
+// para adicionar icones legais utilizar o react-icons
+yarn add react-icons
+
+agora só importar os icones para utilizar
+import { FaGitAlt, FaPlus } from 'react-icons/fa';
+
+
+

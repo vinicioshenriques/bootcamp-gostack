@@ -36,7 +36,7 @@ alert(soma(1, 3));
 //criar arquivo webpack.config.js dentro da pasta
 const path = require("path");
 module.exports = {
-  presets: path.resolve(__dirname, "src", "index.js"),
+  entry: path.resolve(__dirname, "src", "index.js"),
   output: {
     path: path.resolve(__dirname, "public"),
     filename: "bundle.js"
@@ -67,10 +67,23 @@ module.exports = {
 
 
 // no index.html na pasta public criar a div com id app para renderizar o conteudo nela
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Desafio Módulo 04 - Facebook</title>
+  </head>
+  <body>
+    <div id="app"></div>
 
-<div id="app"></div>
+    <script src="./bundle.js"></script>
+  </body>
+</html>
 
-// no index.js da pasta source, importar o react e e render do react-dom
+
+// no index.js da pasta src, importar o react e e render do react-dom
 
 import React from "react";
 import { render } from "react-dom";
@@ -79,7 +92,7 @@ import { render } from "react-dom";
 render(<h1> hello World</h1>, document.getElementById("app"));
 
 
-// criar arquivo app.js na pasta src
+// criar arquivo App.js na pasta src
 
 import React from "react";
 
@@ -106,5 +119,215 @@ yarn add style-loader css-loader -D
 	use: [{ loader: "style-loader" }, { loader: "css-loader" }]
 }
 
+// adicionar o file-loader para importação de imagens como dependendia de desenvolvimento
+
+yarn add file-loader -D 
+
+// adicionamos nova rule no webpack config
+
+
+{
+	test: /.*\.(gif|png|jpe?g)$i/,
+	use: {
+	  loader: "file-loader"
+	}
+}
+
+// criar pasta assets dentro de src e colocar uma imagem dentro, depois importamos
+// a imagem no App.js
+
+import imagem from "./assets/teste.jpg";
+
+// e colocamos ela para ser renderizada em uma tag img
+
+<img width="200" src={imagem} />
+
+// para user a sintaxe dos estados mais resumida na classe do componente instalamos um plugin do 
+// babel 
+yarn add @babel/plugin-proposal-class-properties
+
+// agora criamos um componen e o componente ficaria assim
+
+import React, { Component } from "react";
+
+class TechList extends Component {
+  state = {
+    techs: ["Node.JS", "React.JS", "React Native"]
+  };
+
+  render() {
+    console.log(this.state);
+    return (
+      <ul>
+        {this.state.techs.map(tech => (
+          <li key={tech}>{tech}</li>
+        ))}
+      </ul>
+    );
+  }
+}
+
+export default TechList;
+
+
+////importamos ele no App.js e colocamos ele para ser renderizado 
+
+import React from "react";
+
+import "./App.css";
+
+import TechList from "./components/TechList";
+
+function App() {
+  return <TechList />;
+}
+
+export default App;
+
+////////// as funções dentro do componenente devem ser criadas como arrow function para 
+///// poder acessar o this, assim tendo acesso as propriedades da classe
+/// devemos utilizar o setState() para alterar o valor dos states, pois os valores
+//// dentro da classe são imutáveis
+//// uma boa pratica quando estamos utilizando o input e armazenando o estado, é passar o value 
+// no input com o valor dentro do estado, assim caso o estado seja alterado, o value também altera
+// dentro do input
+
+import React, { Component } from "react";
+
+class TechList extends Component {
+  state = {
+    newTech: "",
+    techs: ["Node.JS", "React.JS", "React Native"]
+  };
+
+  handleInputChange = e => {
+    this.setState({ newTech: e.target.value });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    this.setState({
+      techs: [...this.state.techs, this.state.newTech],
+      newTech: ""
+    });
+  };
+
+  render() {
+    console.log(this.state);
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <ul>
+          {this.state.techs.map(tech => (
+            <li key={tech}>{tech}</li>
+          ))}
+        </ul>
+        <input
+          type="text"
+          onChange={this.handleInputChange}
+          value={this.state.newTech}
+        />
+        <button type="submit">Enviar</button>
+      </form>
+    );
+  }
+}
+
+export default TechList;
+
+/// vale lembrar que como estados são imutáveis, quando o valor é modificado, na verdade estamos
+// recriando, por exemplo, para inserir um valor no array, devemos copiar todo o valor do array,
+// mais o valor novo e criar ele novamente, contendo o ultimo valor adicionado
+
+// para a função de um botão que recebe propriedades não ser executada na hora que a página for
+// criada devemos colocar antes dela uma arrow function
+
+<button type="button" onClick={() => this.handleDelete(tech)}>
+
+// para filtar um array utilizamos o array.filter( objetoDoArray => função ), onde no lugar da
+// função colocamos o que será verificado no objeto do array para ele ser retornado
+
+handleDelete = tech => {
+	this.setState({
+	techs: this.state.techs.filter(t => t !== tech)
+	});
+};
+
+// podemos separar parte do componente em outro componente e passar propriedades ou função para
+// ele, para cada item da TechList criando um tech Item, onde ele recebe pelas propriedades
+// o valor e a função de deletar
+
+
+import React from "react";
+
+function TechItem({ tech, onDelete }) {
+  return (
+    <li>
+      {tech}
+      <button type="button" onClick={onDelete}>
+        Remover
+      </button>
+    </li>
+  );
+}
+
+export default TechItem;
+
+
+////// e no techlist fica assim
+
+{this.state.techs.map(tech => (
+    <TechItem
+      key={tech}
+      tech={tech}
+      onDelete={() => this.handleDelete(tech)}
+    />
+))}
+
+
+// as funções que manipulam estado devem sempre estar junto dos estados, por exemplo, a 
+// função de deletar uma Tech, continuou na TechList, e somente foi passada como uma propriedade
+// no botão delete
+
+
+//Quando uma propriedade de um componente não for informada ele pode ter um valor default
+// então utilizamos o componente.defaultProps={ } e passamos nele os valores default de todas
+// as propriedades que ele necessite.
+// em componentes criados como função componente.defaultProps = { }
+// em componentes criados como classe static defaultProps = {}
+
+
+// Para garantir que o componente vai receber a propriedade do tipo correto podemos utilizar
+// uma biblioteca do react que verifica o tipo da propriedade
+yarn add prop-types
+
+// as proptypes podem ser utilizadas do mesmo jeito que os default props
+
+
+//// CICLO DE VIDA DOS COMPONENTE 
+
+componentDidMount()
+//é chamado assim que o componente aparece em tela, como componente que busca dados em api
+// externa, pode ser chamado por esta função
+componentDidMount() {
+    const techs = localStorage.getItem("techs");
+
+    if (techs) {
+      this.setState({ techs: JSON.parse(techs) });
+    }
+}
+
+
+componentDidUpdate(prevProps, prevState)
+// Executado sempre que houver alteração nas props ou no estado do componente, ele recebe as 
+// propriedades e estados antigos antes da modificação, assim podemos fazer comparações
+if (prevState.techs !== this.state.techs) {
+      localStorage.setItem("techs", JSON.stringify(this.state.techs));
+}
+
+
+componentWillUnmount()
+// executado quando o componente deixa de existir, usado para limpar rastro que o componente
+// possa deixar em nossa aplicação, como event listeners que não morrem com o componente
 
 
