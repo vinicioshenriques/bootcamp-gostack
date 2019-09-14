@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-community/async-storage';
-import { Keyboard, ActivityIndicator } from 'react-native';
+import { Keyboard, ActivityIndicator, ToastAndroid } from 'react-native';
 import api from '../../services/api';
 
 import {
@@ -56,17 +56,48 @@ export default class Main extends Component {
 
         this.setState({ loading: true });
 
-        const response = await api.get(`/users/${newUser}`);
-
-        const data = {
-            name: response.data.name,
-            login: response.data.login,
-            bio: response.data.bio,
-            avatar: response.data.avatar_url,
-        };
+        const userExists = users.filter(user => user.login === newUser);
+        if (userExists.length > 0) {
+            ToastAndroid.showWithGravityAndOffset(
+                'Este usuário já foi adicionado',
+                ToastAndroid.SHORT,
+                ToastAndroid.BOTTOM,
+                25,
+                200
+            );
+        } else {
+            await api
+                .get(`/users/${newUser}`)
+                .then(response => {
+                    ToastAndroid.showWithGravityAndOffset(
+                        'Usuário adicionado com sucesso!',
+                        ToastAndroid.SHORT,
+                        ToastAndroid.BOTTOM,
+                        25,
+                        200
+                    );
+                    const data = {
+                        name: response.data.name,
+                        login: response.data.login,
+                        bio: response.data.bio,
+                        avatar: response.data.avatar_url,
+                    };
+                    this.setState({
+                        users: [...users, data],
+                    });
+                })
+                .catch(err => {
+                    ToastAndroid.showWithGravityAndOffset(
+                        'Este usuário não existe!',
+                        ToastAndroid.SHORT,
+                        ToastAndroid.BOTTOM,
+                        25,
+                        200
+                    );
+                });
+        }
 
         this.setState({
-            users: [...users, data],
             newUser: '',
             loading: false,
         });

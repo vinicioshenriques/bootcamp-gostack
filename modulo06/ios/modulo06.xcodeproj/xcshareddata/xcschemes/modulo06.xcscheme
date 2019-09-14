@@ -43,8 +43,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "modulo06Tests.xctest"
-               BlueprintName = "modulo06Tests"
+               BuildableName = "modulo06.xctest"
+               BlueprintName = "modulo06"
                ReferencedContainer = "container:modulo06.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
