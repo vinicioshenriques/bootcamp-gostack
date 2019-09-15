@@ -1,4 +1,4 @@
-package com.modulo06;
+package com.gitstars;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,7 +10,7 @@ public class MainActivity extends ReactActivity {
 
     @Override
     protected String getMainComponentName() {
-        return "modulo06";
+        return "gitstars";
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.modulo06;
+package com.gitstars;
 
 import android.app.Application;
 import android.util.Log;
