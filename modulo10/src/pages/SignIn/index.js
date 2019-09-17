@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Image } from 'react-native';
 
 import Background from '~/components/Background';
@@ -14,7 +14,8 @@ import {
   SignLinkText,
 } from './styles';
 
-export default function SignIn() {
+export default function SignIn({ navigation }) {
+  const passwordRef = useRef();
   return (
     <Background>
       <Container>
@@ -32,13 +33,15 @@ export default function SignIn() {
           <FormInput
             icon="lock-outline"
             secureTextEntry
+            autoCapitalize="none"
             placeholder="Sua senha secreta"
+            ref={passwordRef}
           />
 
           <SubmitButton onPress={() => {}}>Acessar</SubmitButton>
         </Form>
 
-        <SignLink onPress={() => {}}>
+        <SignLink onPress={() => navigation.navigate('SignUp')}>
           <SignLinkText>Criar conta gratuita</SignLinkText>
         </SignLink>
       </Container>
