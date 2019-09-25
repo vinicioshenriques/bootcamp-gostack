@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "modulo06.app"
-               BlueprintName = "modulo06"
-               ReferencedContainer = "container:modulo06.xcodeproj">
+               BuildableName = "gitstars.app"
+               BlueprintName = "gitstars"
+               ReferencedContainer = "container:gitstars.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "modulo06.xctest"
-               BlueprintName = "modulo06"
-               ReferencedContainer = "container:modulo06.xcodeproj">
+               BuildableName = "gitstars.xctest"
+               BlueprintName = "gitstars"
+               ReferencedContainer = "container:gitstars.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "modulo06Tests.xctest"
-               BlueprintName = "modulo06Tests"
-               ReferencedContainer = "container:modulo06.xcodeproj">
+               BuildableName = "gitstarsTests.xctest"
+               BlueprintName = "gitstarsTests"
+               ReferencedContainer = "container:gitstars.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "modulo06.app"
-            BlueprintName = "modulo06"
-            ReferencedContainer = "container:modulo06.xcodeproj">
+            BuildableName = "gitstars.app"
+            BlueprintName = "gitstars"
+            ReferencedContainer = "container:gitstars.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "modulo06.app"
-            BlueprintName = "modulo06"
-            ReferencedContainer = "container:modulo06.xcodeproj">
+            BuildableName = "gitstars.app"
+            BlueprintName = "gitstars"
+            ReferencedContainer = "container:gitstars.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "modulo06.app"
-            BlueprintName = "modulo06"
-            ReferencedContainer = "container:modulo06.xcodeproj">
+            BuildableName = "gitstars.app"
+            BlueprintName = "gitstars"
+            ReferencedContainer = "container:gitstars.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

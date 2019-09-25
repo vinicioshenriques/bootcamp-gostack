@@ -9,10 +9,14 @@ import { Container, Left, Avatar, Info, Name, Time } from './styles';
 
 export default function Appointment({ data, onCancel }) {
   const dateParsed = useMemo(() => {
-    return formatRelative(parseISO(data.date), new Date(), {
-      locale: pt,
-      addSuffix: true,
-    });
+    return formatRelative(
+      parseISO(data.date).setHours(parseISO(data.date).getHours() + 1),
+      new Date(),
+      {
+        locale: pt,
+        addSuffix: true,
+      }
+    );
   }, [data.date]);
 
   return (
